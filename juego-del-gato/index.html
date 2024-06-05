@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego del Gato</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Juega del Gato</h1>
+  </header>
+  <main class="container">
+    <label>
+      <input type="checkbox" id="startWithO" />
+      Comenzar con O
+    </label>
+    <div id="gameBoard">
+      <div class="cell" data-index-number="0"></div>
+      <div class="cell" data-index-number="1"></div>
+      <div class="cell" data-index-number="2"></div>
+      <div class="cell" data-index-number="3"></div>
+      <div class="cell" data-index-number="4"></div>
+      <div class="cell" data-index-number="5"></div>
+      <div class="cell" data-index-number="6"></div>
+      <div class="cell" data-index-number="7"></div>
+      <div class="cell" data-index-number="8"></div>
+    </div>
+    <button id="resetButton">Reiniciar Juego</button>
+    <p id="status"></p>
+  </main>
+  <footer>
+    <p>Random</p>
+  </footer>
+  <script src="script.js"></script>
+
+</body>
+
+</html>
