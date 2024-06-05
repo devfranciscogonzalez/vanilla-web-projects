@@ -1,6 +1,7 @@
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const resetButton = document.getElementById("resetButton");
+const startWithO = document.getElementById("startWithO");
 
 let currentPlayer = "X";
 let gameState = ["", "", "", "", "", "", "", "", ""];
@@ -16,6 +17,17 @@ const winningConditions = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+
+startWithO.addEventListener("change", (e) => {
+  console.log(e.target.checked);
+  if (e.target.checked) {
+    currentPlayer = "O";
+    statusText.textContent = `Juegador actual ${currentPlayer}`;
+  } else {
+    currentPlayer = "X";
+    statusText.textContent = `Juegador actual ${currentPlayer}`;
+  }
+});
 
 const handleCellClick = (e) => {
   const clickedCell = e.target;
@@ -47,14 +59,18 @@ const handleResultValidation = () => {
   }
 
   if (roundWon) {
-    statusText.textContent = `Player ${currentPlayer} has won!`;
+    if (gameState.includes("")) {
+      cells.forEach((cell) => !cell.textContent && (cell.textContent = "🎉"));
+    }
+
+    statusText.textContent = `Jugador ${currentPlayer} Gano!`;
     gameActive = false;
     return;
   }
 
   const roundDraw = !gameState.includes("");
   if (roundDraw) {
-    statusText.textContent = "Game is a draw!";
+    statusText.textContent = "Empate!";
     gameActive = false;
     return;
   }
