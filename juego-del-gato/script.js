@@ -2,10 +2,16 @@ const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const resetButton = document.getElementById("resetButton");
 const startWithO = document.getElementById("startWithO");
+const scoreX = document.getElementById("scoreX");
+const scoreO = document.getElementById("scoreO");
 
 let currentPlayer = "X";
 let gameState = ["", "", "", "", "", "", "", "", ""];
 let gameActive = true;
+let score = {
+  X: 0,
+  O: 0,
+};
 
 const winningConditions = [
   [0, 1, 2],
@@ -65,6 +71,9 @@ const handleResultValidation = () => {
 
     statusText.textContent = `Jugador ${currentPlayer} Gano!`;
     gameActive = false;
+    score[currentPlayer] += 1;
+    scoreX.textContent = score.X;
+    scoreO.textContent = score.O;
     return;
   }
 
