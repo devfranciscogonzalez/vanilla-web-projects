@@ -9,33 +9,35 @@
 </head>
 
 <body>
-  <header>
-    <h1>Juega del Gato</h1>
-  </header>
   <main class="container">
-    <label>
-      <input type="checkbox" id="startWithO" />
-      Comenzar con O
-    </label>
-    <div id="gameBoard">
-      <div class="cell" data-index-number="0"></div>
-      <div class="cell" data-index-number="1"></div>
-      <div class="cell" data-index-number="2"></div>
-      <div class="cell" data-index-number="3"></div>
-      <div class="cell" data-index-number="4"></div>
-      <div class="cell" data-index-number="5"></div>
-      <div class="cell" data-index-number="6"></div>
-      <div class="cell" data-index-number="7"></div>
-      <div class="cell" data-index-number="8"></div>
-    </div>
-    <button id="resetButton">Reiniciar Juego</button>
-    <p id="status"></p>
-    <p id="scoreX"></p>
-    <p id="scoreO"></p>
+    <header>
+      <h1>Juega del Gato</h1>
+    </header>
+    <section class="game">
+      <label>
+        <input type="checkbox" id="startWithO" />
+        Comenzar con O
+      </label>
+      <div id="gameBoard">
+        <div class="cell" data-index-number="0"></div>
+        <div class="cell" data-index-number="1"></div>
+        <div class="cell" data-index-number="2"></div>
+        <div class="cell" data-index-number="3"></div>
+        <div class="cell" data-index-number="4"></div>
+        <div class="cell" data-index-number="5"></div>
+        <div class="cell" data-index-number="6"></div>
+        <div class="cell" data-index-number="7"></div>
+        <div class="cell" data-index-number="8"></div>
+      </div>
+      <button id="resetButton">Reiniciar Juego</button>
+      <p id="status"></p>
+      <p id="scoreX"></p>
+      <p id="scoreO"></p>
+    </section>
+    <!-- <footer>
+      <p>Random</p>
+    </footer> -->
   </main>
-  <footer>
-    <p>Random</p>
-  </footer>
   <script src="script.js"></script>
 
 </body>

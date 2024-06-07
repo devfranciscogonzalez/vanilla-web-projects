@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -11,11 +13,24 @@
 
 body {
   display: flex;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
   min-height: 100vh;
-  background-color: var(--main-bg-color);
-  font-family: "Roboto", sans-serif;
+  min-width: 100vw;
+  font-family: "Fredericka the Great", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 1220px;
+  min-height: 824px;
+  background-image: url("gridpaper.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 header {
@@ -24,12 +39,11 @@ header {
   text-align: center;
 }
 
-.container {
+.game {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: red;
 }
 
 #gameBoard {
