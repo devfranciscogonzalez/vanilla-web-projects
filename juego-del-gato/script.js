@@ -1,19 +1,8 @@
-const cells = document.querySelectorAll(".cell");
-const statusText = document.getElementById("status");
-const resetButton = document.getElementById("resetButton");
-const startWithO = document.getElementById("startWithO");
-const scoreX = document.getElementById("scoreX");
-const scoreO = document.getElementById("scoreO");
-
-let currentPlayer = "X";
-let gameState = ["", "", "", "", "", "", "", "", ""];
-let gameActive = true;
-let score = {
-  X: 0,
-  O: 0,
-};
-
-const winningConditions = [
+// Constantes
+const CELL_CLASS = "cell";
+const PLAYER_X = "X";
+const PLAYER_O = "O";
+const WINNING_CONDITIONS = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -24,78 +13,113 @@ const winningConditions = [
   [2, 4, 6],
 ];
 
-startWithO.addEventListener("change", (e) => {
-  console.log(e.target.checked);
-  if (e.target.checked) {
-    currentPlayer = "O";
-    statusText.textContent = `Juegador actual ${currentPlayer}`;
-  } else {
-    currentPlayer = "X";
-    statusText.textContent = `Juegador actual ${currentPlayer}`;
-  }
-});
+// Elementos del DOM
+const cells = document.querySelectorAll(`.${CELL_CLASS}`);
+const statusText = document.getElementById("status");
+const resetButton = document.getElementById("resetButton");
+const startWithO = document.getElementById("startWithO");
+const scoreX = document.getElementById("scoreX");
+const scoreO = document.getElementById("scoreO");
+
+// Estado del juego
+let currentPlayer = PLAYER_X;
+let gameState = Array(9).fill("");
+let gameActive = true;
+let score = {
+  [PLAYER_X]: 0,
+  [PLAYER_O]: 0,
+};
+
+// Inicializar juego
+const initGame = () => {
+  cells.forEach((cell, index) => {
+    cell.dataset.indexNumber = index;
+    cell.addEventListener("click", handleCellClick);
+  });
+  resetButton.addEventListener("click", handleRestartGame);
+  startWithO.addEventListener("change", handleStartWithOChange);
+  scoreX.textContent = score[PLAYER_X];
+  scoreO.textContent = score[PLAYER_O];
+  updateStatusText();
+};
+
+const handleStartWithOChange = (e) => {
+  currentPlayer = e.target.checked ? PLAYER_O : PLAYER_X;
+  updateStatusText();
+};
 
 const handleCellClick = (e) => {
+  startWithO.disabled = true;
   const clickedCell = e.target;
   const clickedCellIndex = parseInt(clickedCell.dataset.indexNumber);
 
-  if (gameState[clickedCellIndex] !== "" || !gameActive) {
-    return;
-  }
+  if (gameState[clickedCellIndex] !== "" || !gameActive) return;
 
-  gameState[clickedCellIndex] = currentPlayer;
-  clickedCell.textContent = currentPlayer;
-  handleResultValidation();
+  updateCell(clickedCell, clickedCellIndex);
+  checkResult();
 };
 
-const handleResultValidation = () => {
-  let roundWon = false;
-  for (let i = 0; i < winningConditions.length; i++) {
-    const winCondition = winningConditions[i];
-    let a = gameState[winCondition[0]];
-    let b = gameState[winCondition[1]];
-    let c = gameState[winCondition[2]];
-    if (a === "" || b === "" || c === "") {
-      continue;
-    }
-    if (a === b && b === c) {
-      roundWon = true;
-      break;
-    }
-  }
+const updateCell = (cell, index) => {
+  gameState[index] = currentPlayer;
+  cell.textContent = currentPlayer;
+};
+
+const checkResult = () => {
+  let roundWon = WINNING_CONDITIONS.some((condition) => {
+    const [a, b, c] = condition.map((index) => gameState[index]);
+    return a && a === b && b === c;
+  });
 
   if (roundWon) {
-    if (gameState.includes("")) {
-      cells.forEach((cell) => !cell.textContent && (cell.textContent = "🎉"));
-    }
-
-    statusText.textContent = `Jugador ${currentPlayer} Gano!`;
-    gameActive = false;
-    score[currentPlayer] += 1;
-    scoreX.textContent = score.X;
-    scoreO.textContent = score.O;
+    endGame(`${currentPlayer} Gano!`);
+    updateScore();
+    startWithO.disabled = false;
     return;
   }
 
-  const roundDraw = !gameState.includes("");
-  if (roundDraw) {
-    statusText.textContent = "Empate!";
-    gameActive = false;
+  if (!gameState.includes("")) {
+    endGame("Empate!");
     return;
   }
 
-  currentPlayer = currentPlayer === "X" ? "O" : "X";
-  statusText.textContent = `Juegador actual ${currentPlayer}`;
+  switchPlayer();
+};
+
+const endGame = (message) => {
+  statusText.textContent = message;
+  gameActive = false;
+  fillEmptyCells();
+};
+
+const fillEmptyCells = () => {
+  cells.forEach((cell) => {
+    if (!cell.textContent) cell.textContent = "-";
+  });
+};
+
+const updateScore = () => {
+  score[currentPlayer]++;
+  scoreX.textContent = score[PLAYER_X];
+  scoreO.textContent = score[PLAYER_O];
+};
+
+const switchPlayer = () => {
+  currentPlayer = currentPlayer === PLAYER_X ? PLAYER_O : PLAYER_X;
+  updateStatusText();
+};
+
+const updateStatusText = () => {
+  statusText.textContent = `Jugador actual ${currentPlayer}`;
 };
 
 const handleRestartGame = () => {
-  currentPlayer = "X";
-  gameState = ["", "", "", "", "", "", "", "", ""];
+  currentPlayer = PLAYER_X;
+  gameState.fill("");
   gameActive = true;
-  statusText.textContent = `Juegador actual ${currentPlayer}`;
   cells.forEach((cell) => (cell.textContent = ""));
+  startWithO.disabled = false;
+  updateStatusText();
 };
 
-cells.forEach((cell) => cell.addEventListener("click", handleCellClick));
-resetButton.addEventListener("click", handleRestartGame);
-statusText.textContent = `Juegador actual ${currentPlayer}`;
+// Inicialización del juego al cargar la página
+initGame();
