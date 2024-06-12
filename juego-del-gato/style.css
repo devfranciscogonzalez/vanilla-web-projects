@@ -10,6 +10,7 @@
   --main-bg-color: #f5f5f5;
   --main-text-color: #000000;
   --secondary-text-color: #ff0000;
+  --win-text-color: #00ff44;
 }
 
 body {
@@ -64,7 +65,7 @@ header h1 span {
   width: 300px;
   height: 300px;
 }
-.score_label{
+.score_label {
   font-size: 1.5rem;
 }
 .score {
@@ -88,6 +89,13 @@ header h1 span {
   height: 100px;
   font-size: 4rem;
   user-select: none;
+}
+
+.cell_color {
+  color: var(--secondary-text-color);
+}
+.cell_color_win {
+  color: var(--win-text-color);
 }
 
 /* Elimina los bordes superiores de las celdas de la primera fila */

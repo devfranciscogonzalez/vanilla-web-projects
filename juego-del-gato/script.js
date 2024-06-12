@@ -12,11 +12,17 @@ const WINNING_CONDITIONS = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+const STATUS_MESSAGES = {
+  win: (player) => `Jugador ${player} Gano!`,
+  draw: "Empate!",
+  currentPlayer: (player) => `Jugador actual ${player}`,
+};
 
 // Elementos del DOM
 const cells = document.querySelectorAll(`.${CELL_CLASS}`);
 const statusText = document.getElementById("status");
 const resetButton = document.getElementById("resetButton");
+const againButton = document.getElementById("againButton");
 const startWithO = document.getElementById("startWithO");
 const scoreX = document.getElementById("scoreX");
 const scoreO = document.getElementById("scoreO");
@@ -33,13 +39,12 @@ let score = {
 // Inicializar juego
 const initGame = () => {
   cells.forEach((cell, index) => {
-    cell.dataset.indexNumber = index;
     cell.addEventListener("click", handleCellClick);
   });
   resetButton.addEventListener("click", handleRestartGame);
+  againButton.addEventListener("click", handleAgainGame);
   startWithO.addEventListener("change", handleStartWithOChange);
-  scoreX.textContent = score[PLAYER_X];
-  scoreO.textContent = score[PLAYER_O];
+  updateScores();
   updateStatusText();
 };
 
@@ -62,6 +67,9 @@ const handleCellClick = (e) => {
 const updateCell = (cell, index) => {
   gameState[index] = currentPlayer;
   cell.textContent = currentPlayer;
+  if (currentPlayer === PLAYER_X) {
+    cell.classList.add("cell_color");
+  }
 };
 
 const checkResult = () => {
@@ -71,14 +79,13 @@ const checkResult = () => {
   });
 
   if (roundWon) {
-    endGame(`${currentPlayer} Gano!`);
+    endGame(STATUS_MESSAGES.win(currentPlayer));
     updateScore();
-    startWithO.disabled = false;
     return;
   }
 
   if (!gameState.includes("")) {
-    endGame("Empate!");
+    endGame(STATUS_MESSAGES.draw);
     return;
   }
 
@@ -99,8 +106,23 @@ const fillEmptyCells = () => {
 
 const updateScore = () => {
   score[currentPlayer]++;
+  updateScores();
+  highlightScore();
+};
+
+const updateScores = () => {
   scoreX.textContent = score[PLAYER_X];
   scoreO.textContent = score[PLAYER_O];
+};
+
+const highlightScore = () => {
+  if (currentPlayer === PLAYER_X) {
+    scoreO.classList.remove("cell_color_win");
+    scoreX.classList.add("cell_color_win");
+  } else {
+    scoreX.classList.remove("cell_color_win");
+    scoreO.classList.add("cell_color_win");
+  }
 };
 
 const switchPlayer = () => {
@@ -109,16 +131,37 @@ const switchPlayer = () => {
 };
 
 const updateStatusText = () => {
-  statusText.textContent = `Jugador actual ${currentPlayer}`;
+  statusText.textContent = STATUS_MESSAGES.currentPlayer(currentPlayer);
 };
 
 const handleRestartGame = () => {
+  resetGame();
+  resetScores();
+  startWithO.checked = false;
+};
+
+const handleAgainGame = () => {
+  resetGame();
+};
+
+const resetGame = () => {
   currentPlayer = PLAYER_X;
   gameState.fill("");
   gameActive = true;
-  cells.forEach((cell) => (cell.textContent = ""));
+  cells.forEach((cell) => {
+    cell.textContent = "";
+    cell.classList.remove("cell_color");
+  });
   startWithO.disabled = false;
   updateStatusText();
+};
+
+const resetScores = () => {
+  score[PLAYER_X] = 0;
+  score[PLAYER_O] = 0;
+  updateScores();
+  scoreO.classList.remove("cell_color_win");
+  scoreX.classList.remove("cell_color_win");
 };
 
 // Inicialización del juego al cargar la página
