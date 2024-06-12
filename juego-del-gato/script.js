@@ -38,7 +38,7 @@ let score = {
 
 // Inicializar juego
 const initGame = () => {
-  cells.forEach((cell, index) => {
+  cells.forEach((cell) => {
     cell.addEventListener("click", handleCellClick);
   });
   resetButton.addEventListener("click", handleRestartGame);
@@ -137,7 +137,6 @@ const updateStatusText = () => {
 const handleRestartGame = () => {
   resetGame();
   resetScores();
-  startWithO.checked = false;
 };
 
 const handleAgainGame = () => {
@@ -152,6 +151,7 @@ const resetGame = () => {
     cell.textContent = "";
     cell.classList.remove("cell_color");
   });
+  startWithO.checked = false;
   startWithO.disabled = false;
   updateStatusText();
 };

@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Juego del Gato</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -34,22 +37,17 @@
         <output class="score" id="scoreO">Score</output>
       </div>
     </section>
+    <p id="status" class="status"></p>
     <section class="menu">
-      <button id="resetButton">Reiniciar Juego</button>
-      <button id="againButton">Reiniciar Juego</button>
-      <p id="status"></p>
-      <label>
+      <button id="resetButton" class="button"><i class="fa-solid fa-rotate-left"></i></button>
+      <button id="againButton" class="button"><i class="fa-regular fa-circle-play"></i></button>
+      <label class="styled-checkbox">
         <input type="checkbox" id="startWithO" />
-        Comenzar con O
+        <span class="styled-checkbox-label">Comenzar con O</span>
       </label>
     </section>
-
-    <!-- <footer>
-      <p>Random</p>
-    </footer> -->
   </main>
   <script src="script.js"></script>
-
 </body>
 
 </html>

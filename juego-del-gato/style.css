@@ -10,7 +10,8 @@
   --main-bg-color: #f5f5f5;
   --main-text-color: #000000;
   --secondary-text-color: #ff0000;
-  --win-text-color: #00ff44;
+  --win-text-color: #0004ff;
+  --secondary-font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -60,23 +61,25 @@ header h1 span {
 .score_container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 300px;
   height: 300px;
 }
+
 .score_label {
   font-size: 1.5rem;
 }
+
 .score {
   font-size: 3rem;
 }
 
 #gameBoard {
+  grid-gap: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 20px;
-  grid-gap: 0;
 }
 
 .cell {
@@ -84,7 +87,7 @@ header h1 span {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border: 5px solid rgb(0, 0, 0, 0.3);
+  border: 5px solid rgba(0, 0, 0, 0.3);
   width: 100px;
   height: 100px;
   font-size: 4rem;
@@ -94,43 +97,87 @@ header h1 span {
 .cell_color {
   color: var(--secondary-text-color);
 }
+
 .cell_color_win {
   color: var(--win-text-color);
 }
 
-/* Elimina los bordes superiores de las celdas de la primera fila */
 #gameBoard > .cell:nth-child(-n + 3) {
   border-top: none;
 }
 
-/* Elimina los bordes izquierdos de las celdas de la primera columna */
 #gameBoard > .cell:nth-child(3n + 1) {
   border-left: none;
 }
 
-/* Elimina los bordes derechos de las celdas de la última columna */
 #gameBoard > .cell:nth-child(3n) {
   border-right: none;
 }
 
-/* Elimina los bordes inferiores de las celdas de la última fila */
 #gameBoard > .cell:nth-last-child(-n + 3) {
   border-bottom: none;
 }
 
-#resetButton {
+.button {
   cursor: pointer;
   margin: 10px 0;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 1em;
-
-  &:hover {
-    background-color: #0099ff;
-    color: #fff;
-  }
 }
 
-footer {
-  margin-top: auto;
+.button:hover {
+  background-color: #0099ff;
+  color: #fff;
+}
+
+.status {
+  font-size: 1.2rem;
+  font-family: var(--secondary-font-family);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 16px;
+}
+
+.styled-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: var(--secondary-font-family);
+}
+
+.styled-checkbox input[type="checkbox"] {
+  display: none;
+}
+.styled-checkbox .styled-checkbox-label {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--main-text-color);
+  border-radius: 5px;
+  background-color: var(--main-bg-color);
+  padding: 10px 20px;
+  font-size: 1em;
+}
+
+.styled-checkbox .styled-checkbox-label:hover {
+  background-color: #0099ff;
+  color: white;
+}
+
+.styled-checkbox input[type="checkbox"]:checked + .styled-checkbox-label {
+  background-color: #0099ff;
+  color: white;
+}
+
+.disabled-checkbox {
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: line-through;
 }
