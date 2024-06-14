@@ -61,6 +61,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 32px;
+  margin-bottom: 32px;
 }
 
 .game__score-container {
@@ -125,20 +126,18 @@ body {
   font-size: 1.2rem;
   font-family: var(--font-family-secondary);
   text-align: center;
-  margin-top: 10px;
+  margin-bottom: 16px;
 }
 
 .menu {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  margin-top: 16px;
+  gap: 8px;
 }
 
 .menu__button {
   cursor: pointer;
-  margin: 10px 0;
   border: 2px solid var(--color-text-primary);
   border-radius: 5px;
   padding: 10px 20px;
