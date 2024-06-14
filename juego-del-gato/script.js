@@ -1,5 +1,4 @@
 // Constantes
-const CELL_CLASS = "cell";
 const PLAYER_X = "X";
 const PLAYER_O = "O";
 const WINNING_CONDITIONS = [
@@ -19,13 +18,13 @@ const STATUS_MESSAGES = {
 };
 
 // Elementos del DOM
-const cells = document.querySelectorAll(`.${CELL_CLASS}`);
-const statusText = document.getElementById("status");
-const resetButton = document.getElementById("resetButton");
-const againButton = document.getElementById("againButton");
-const startWithO = document.getElementById("startWithO");
+const cells = document.querySelectorAll(".game__cell");
 const scoreX = document.getElementById("scoreX");
 const scoreO = document.getElementById("scoreO");
+const statusText = document.querySelector(".status");
+const againButton = document.getElementById("againButton");
+const startWithO = document.getElementById("startWithO");
+const resetButton = document.getElementById("resetButton");
 
 // Estado del juego
 let currentPlayer = PLAYER_X;

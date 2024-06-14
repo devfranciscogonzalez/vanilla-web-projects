@@ -7,11 +7,13 @@
 }
 
 :root {
-  --main-bg-color: #f5f5f5;
-  --main-text-color: #000000;
-  --secondary-text-color: #ff0000;
-  --win-text-color: #0004ff;
-  --secondary-font-family: "Roboto", sans-serif;
+  --color-bg-main: #f5f5f5;
+
+  --color-text-primary: #000000;
+  --color-text-secondary: #ff0000;
+  --color-text-tertiary: #0004ff;
+
+  --font-family-secondary: "Roboto", sans-serif;
 }
 
 body {
@@ -34,31 +36,34 @@ body {
   min-height: 824px;
 }
 
-header {
+.header {
   text-align: center;
 }
 
-header h1 {
+.header__title {
   margin: 32px 0;
-  color: var(--main-text-color);
+  color: var(--color-text-primary);
   font-weight: 400;
   font-size: 3rem;
   text-decoration: underline;
-  text-decoration-thickness: 3px;
 }
 
-header h1 span {
-  color: var(--secondary-text-color);
+.header__title--blue {
+  color: var(--color-text-tertiary);
+}
+
+.header__title--red {
+  color: var(--color-text-secondary);
 }
 
 .game {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 32px;
 }
 
-.score_container {
+.game__score-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,25 +72,39 @@ header h1 span {
   height: 300px;
 }
 
-.score_label {
+.game__score-label {
   font-size: 1.5rem;
 }
 
-.score {
+.game__score {
   font-size: 3rem;
 }
 
-#gameBoard {
+.game__board {
   grid-gap: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
-.cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.game__board > .game__cell:nth-child(-n + 3) {
+  border-top: none;
+}
+
+.game__board > .game__cell:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.game__board > .game__cell:nth-child(3n) {
+  border-right: none;
+}
+
+.game__board > .game__cell:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+.game__cell {
+  text-align: center;
   cursor: pointer;
   border: 5px solid rgba(0, 0, 0, 0.3);
   width: 100px;
@@ -95,45 +114,16 @@ header h1 span {
 }
 
 .cell_color {
-  color: var(--secondary-text-color);
+  color: var(--color-text-secondary);
 }
 
 .cell_color_win {
-  color: var(--win-text-color);
-}
-
-#gameBoard > .cell:nth-child(-n + 3) {
-  border-top: none;
-}
-
-#gameBoard > .cell:nth-child(3n + 1) {
-  border-left: none;
-}
-
-#gameBoard > .cell:nth-child(3n) {
-  border-right: none;
-}
-
-#gameBoard > .cell:nth-last-child(-n + 3) {
-  border-bottom: none;
-}
-
-.button {
-  cursor: pointer;
-  margin: 10px 0;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1em;
-}
-
-.button:hover {
-  background-color: #0099ff;
-  color: #fff;
+  color: var(--color-text-tertiary);
 }
 
 .status {
   font-size: 1.2rem;
-  font-family: var(--secondary-font-family);
+  font-family: var(--font-family-secondary);
   text-align: center;
   margin-top: 10px;
 }
@@ -146,34 +136,49 @@ header h1 span {
   margin-top: 16px;
 }
 
-.styled-checkbox {
+.menu__button {
+  cursor: pointer;
+  margin: 10px 0;
+  border: 2px solid var(--color-text-primary);
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1em;
+  background: none;
+}
+
+.menu__button:hover {
+  background-color: var(--color-bg-main);
+}
+
+.menu__checkbox {
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-family: var(--secondary-font-family);
+  font-family: var(--font-family-secondary);
+  color: var(--color-text-primary);
 }
 
-.styled-checkbox input[type="checkbox"] {
+.menu__checkbox input[type="checkbox"] {
   display: none;
 }
-.styled-checkbox .styled-checkbox-label {
+
+.menu__checkbox .menu__checkbox-label {
   display: flex;
   align-items: center;
-  border: 2px solid var(--main-text-color);
+  border: 2px solid var(--color-text-primary);
   border-radius: 5px;
-  background-color: var(--main-bg-color);
+  background: none;
   padding: 10px 20px;
   font-size: 1em;
 }
 
-.styled-checkbox .styled-checkbox-label:hover {
-  background-color: #0099ff;
-  color: white;
+.menu__checkbox .menu__checkbox-label:hover {
+  background-color: var(--color-bg-main);
 }
 
-.styled-checkbox input[type="checkbox"]:checked + .styled-checkbox-label {
-  background-color: #0099ff;
-  color: white;
+.menu__checkbox input[type="checkbox"]:checked + .menu__checkbox-label {
+  background-color: var(--color-bg-main);
+  border-color: var(--color-text-secondary);
 }
 
 .disabled-checkbox {

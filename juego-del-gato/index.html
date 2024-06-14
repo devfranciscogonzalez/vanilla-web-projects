@@ -13,38 +13,40 @@
 
 <body>
   <main class="container">
-    <header>
-      <h1>Juego del <span>Gato</span></h1>
+    <header class="header">
+      <h1 class="header__title">
+        <span class="header__title--blue">Juego</span> del <span class="header__title--red">Gato</span>
+      </h1>
     </header>
     <section class="game">
-      <div class="score_container">
-        <label for="scoreX" class="score_label">Puntaje X</label>
-        <output class="score" id="scoreX">Score</output>
+      <div class="game__score-container">
+        <label for="scoreX" class="game__score-label">Puntaje X</label>
+        <output class="game__score" id="scoreX">Score</output>
       </div>
-      <article id="gameBoard">
-        <div class="cell" data-index-number="0"></div>
-        <div class="cell" data-index-number="1"></div>
-        <div class="cell" data-index-number="2"></div>
-        <div class="cell" data-index-number="3"></div>
-        <div class="cell" data-index-number="4"></div>
-        <div class="cell" data-index-number="5"></div>
-        <div class="cell" data-index-number="6"></div>
-        <div class="cell" data-index-number="7"></div>
-        <div class="cell" data-index-number="8"></div>
+      <article class="game__board" id="gameBoard">
+        <div class="game__cell" data-index-number="0"></div>
+        <div class="game__cell" data-index-number="1"></div>
+        <div class="game__cell" data-index-number="2"></div>
+        <div class="game__cell" data-index-number="3"></div>
+        <div class="game__cell" data-index-number="4"></div>
+        <div class="game__cell" data-index-number="5"></div>
+        <div class="game__cell" data-index-number="6"></div>
+        <div class="game__cell" data-index-number="7"></div>
+        <div class="game__cell" data-index-number="8"></div>
       </article>
-      <div class="score_container">
-        <label for="scoreO" class="score_label">Puntaje O</label>
-        <output class="score" id="scoreO">Score</output>
+      <div class="game__score-container">
+        <label for="scoreO" class="game__score-label">Puntaje O</label>
+        <output class="game__score" id="scoreO">Score</output>
       </div>
     </section>
-    <p id="status" class="status"></p>
+    <p class="status"></p>
     <section class="menu">
-      <button id="resetButton" class="button"><i class="fa-solid fa-rotate-left"></i></button>
-      <button id="againButton" class="button"><i class="fa-regular fa-circle-play"></i></button>
-      <label class="styled-checkbox">
+      <button class="menu__button" id="againButton"><i class="fa-regular fa-circle-play"></i></button>
+      <label class="menu__checkbox">
         <input type="checkbox" id="startWithO" />
-        <span class="styled-checkbox-label">Comenzar con O</span>
+        <span class="menu__checkbox-label">Comienza O</span>
       </label>
+      <button class="menu__button" id="resetButton"><i class="fa-solid fa-rotate-left"></i></button>
     </section>
   </main>
   <script src="script.js"></script>
