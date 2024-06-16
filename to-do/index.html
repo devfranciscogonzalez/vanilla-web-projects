@@ -9,11 +9,15 @@
 </head>
 
 <body>
-  <h1>To Do</h1>
-  <input type="text" id="inputTask" placeholder="Enter a task">
-  <button id="addTask">Add</button>
-  <main class="task__list">
-    <ul id="tasks"></ul>
+  <main class="container">
+    <header>
+      <h1>To-Do App</h1>
+    </header>
+    <section class="input-container">
+      <input type="text" id="new-task" placeholder="Nueva tarea...">
+      <button onclick="addTask()">+</button>
+    </section>
+    <ul id="task-list"></ul>
   </main>
   <script src="script.js"></script>
 </body>
