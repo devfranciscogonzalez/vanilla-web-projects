@@ -3,16 +3,22 @@
   padding: 0;
   box-sizing: border-box;
 }
+hr {
+  color: black;
+  height: 2px;
+  width: 100%;
+}
 
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   width: 100vw;
   margin-top: 24px;
   gap: 24px;
 }
+
 img {
   width: 300px;
   min-width: 100px;
@@ -25,4 +31,43 @@ img {
 .img_filter {
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
   /* filter: drop-shadow(15px 25px 35px red); */
+}
+
+.gradient_border {
+  color: white;
+  padding: 16px;
+  border-radius: 5px;
+  border: 10px solid transparent;
+  background: linear-gradient(black, #130d0d) padding-box,
+    linear-gradient(#09f, white) border-box;
+}
+
+/* .gradient_border {
+  color: white;
+  padding: 16px;
+  border-radius: 5px;
+  border: 10px solid transparent;
+  border-image: linear-gradient(#09f, #ff1111) 1;
+  background: linear-gradient(black, #222);
+} */
+
+.tooltip {
+  --base: 2em;
+  --height: 1em;
+  --color: #09f;
+  color: white;
+
+  border-image: fill 0 / 0 / var(--height) conic-gradient(var(--color) 0 0);
+
+  clip-path: polygon(
+    0 100%,
+    0 0,
+    100% 0,
+    100% 100%,
+    calc(50% + var(--base) / 2) 100%,
+    50% calc(100% + var(--height)),
+    calc(50% - var(--base) / 2) 100%
+  );
+
+  padding: 1em;
 }
